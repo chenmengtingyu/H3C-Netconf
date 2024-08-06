@@ -4,7 +4,7 @@ from ncclient.xml_ import to_ele
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 def display_static_routing_table():
     # 移除 error-when-rollback 属性

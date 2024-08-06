@@ -8,7 +8,7 @@ from ncclient.operations.rpc import RPCError
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 def create_interface_vlan_rpc(interface_name, vlan_id):
     return f"""
@@ -68,29 +68,15 @@ def _check_response(rpc_obj, snippet_name):
     else:
         print("Cannot successfully execute: %s" % snippet_name)
 
-def vlan_int_mgmt_temp(host, port, user, password):
-    choice = input('请输入操作类型 (add/del): ')
-    if choice == 'add':
-        interface_name = input("请输入接口名称 (例如 GigabitEthernet1/0/1): ")
-        vlan_id = input("请输入 VLAN ID: ")
-        rpc_xml = create_interface_vlan_rpc(interface_name, vlan_id)
-        operation = '添加接口到VLAN'
-    elif choice == 'del':
-        interface_name = input("请输入需要从 VLAN 中删除的接口名称: ")
-        rpc_xml = delete_interface_from_vlan_rpc(interface_name)
-        operation = '从VLAN删除接口'
-    else:
-        print('无效输入')
-        return
-
+def vlan_int_mgmt(host, port, user, password, rpc_xml, operation):
     with manager.connect(host=host, port=port, username=user,
                          password=password, hostkey_verify=False,
                          device_params={'name': 'h3c'}, timeout=30, allow_agent=False, look_for_keys=False) as m:
         rpc_obj = m.edit_config(target='running', config=rpc_xml)
         _check_response(rpc_obj, operation)
 
-def vlan_int_mgmt():
-    vlan_int_mgmt_temp(hostname, port, username, password)
+# def vlan_int_mgmt():
+#     vlan_int_mgmt_temp(hostname, port, username, password)
 
 # if __name__ == '__main__':
 #     vlan_int_mgmt(hostname, port, username, password)

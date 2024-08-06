@@ -4,7 +4,7 @@ from ncclient.xml_ import to_ele
 host = {
     'host': '192.168.1.1',
     'username': 'admin',
-    'password': 'admin',
+    'password': 'wq20040903',
     'port': 830,
     'device_params': {'name': 'h3c'},
 }

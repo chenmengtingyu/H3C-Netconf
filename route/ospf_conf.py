@@ -4,7 +4,7 @@ from ncclient.xml_ import to_ele
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 def create_ospf_configuration_commands(process_id, area_id, networks):
     commands = f"""
@@ -24,7 +24,7 @@ def create_ospf_configuration_commands(process_id, area_id, networks):
     """
     return commands
 
-def configure_ospf(host, port, username, password, process_id, area_id, networks):
+def ospf_conf(host, port, username, password, process_id, area_id, networks):
     with manager.connect(host=host, port=port, username=username,
                          password=password, hostkey_verify=False,
                          device_params={'name': 'h3c'}, timeout=30, allow_agent=False, look_for_keys=False) as m:
@@ -33,11 +33,11 @@ def configure_ospf(host, port, username, password, process_id, area_id, networks
         response = m.dispatch(ospf_config_command)
         print(response.xml)
 
-def ospf_conf():
-    process_id = input('请输入 OSPF 进程 ID: ')
-    area_id = input('请输入区域 ID: ')
-    networks = input('请输入要宣告的网络地址和掩码反码，用逗号分隔: ').split(',')
-    configure_ospf(hostname, port, username, password, process_id, area_id, networks)
+# def ospf_conf():
+#     process_id = input('请输入 OSPF 进程 ID: ')
+#     area_id = input('请输入区域 ID: ')
+#     networks = input('请输入要宣告的网络地址和掩码反码，用逗号分隔: ').split(',')
+#     configure_ospf(hostname, port, username, password, process_id, area_id, networks)
 
 # if __name__ == '__main__':
 #     ospf_conf()

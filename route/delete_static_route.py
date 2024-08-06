@@ -4,7 +4,7 @@ from ncclient.xml_ import to_ele
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 def create_delete_all_static_routes_command():
     return """
@@ -25,11 +25,7 @@ def delete_all_static_routes(host, port, username, password):
         print(response.xml)
 
 def delete_static_route():
-    confirm = input('确定要删除所有静态路由吗？(yes/no): ')
-    if confirm.lower() == 'yes':
-        delete_all_static_routes(hostname, port, username, password)
-    else:
-        print("操作已取消。")
+    delete_all_static_routes(hostname, port, username, password)
 
 # if __name__ == '__main__':
 #     delete_static_route()

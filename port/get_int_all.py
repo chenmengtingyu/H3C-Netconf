@@ -11,7 +11,7 @@ log = logging.getLogger(__name__)
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 # 获取接口信息的 RPC 报文
 IF_GET_RPC = """

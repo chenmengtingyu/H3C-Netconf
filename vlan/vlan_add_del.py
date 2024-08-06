@@ -8,7 +8,7 @@ from ncclient.operations.rpc import RPCError
 hostname = '192.168.1.1'
 port = 830
 username = 'admin'
-password = 'admin'
+password = 'wq20040903'
 
 def create_vlan_rpc(vlan_id, vlan_name, vlan_description):
     return f"""
@@ -66,20 +66,7 @@ def _check_response(rpc_obj, snippet_name):
     else:
         print("Cannot successfully execute: %s" % snippet_name)
 
-def add_del_vlan_temp(host, port, user, password):
-    choice = input('add/del:')
-    if choice == 'add':
-        vlan_id = input("请输入 VLAN ID: ")
-        vlan_name = input("请输入 VLAN 名称: ")
-        vlan_description = input("请输入 VLAN 描述: ")
-        vlan_rpc = create_vlan_rpc(vlan_id, vlan_name, vlan_description)
-    elif choice == 'del':
-        vlan_id = input("请输入需要删除的 VLAN ID: ")
-        vlan_rpc = delete_vlan_rpc(vlan_id)
-    else:
-        print('无效输入')
-        return
-    
+def add_del_vlan(host, port, user, password, vlan_rpc):
     with manager.connect(host=host, port=port, username=user,
                          password=password, hostkey_verify=False,
                          device_params={'name': 'h3c'}, timeout=30, allow_agent=False, look_for_keys=False) as m:
@@ -87,5 +74,5 @@ def add_del_vlan_temp(host, port, user, password):
         _check_response(rpc_obj, 'VLAN_MERGE')
 
 
-def add_del_vlan():
-    add_del_vlan_temp(hostname, port, username, password)
+# def add_del_vlan():
+#     add_del_vlan_temp(hostname, port, username, password)
